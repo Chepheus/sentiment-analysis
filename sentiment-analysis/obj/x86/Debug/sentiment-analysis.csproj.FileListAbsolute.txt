@@ -1,0 +1,5 @@
+/home/anton/CSharp/sentiment-analysis/sentiment-analysis/bin/Debug/sentiment-analysis.exe
+/home/anton/CSharp/sentiment-analysis/sentiment-analysis/bin/Debug/sentiment-analysis.pdb
+/home/anton/CSharp/sentiment-analysis/sentiment-analysis/obj/x86/Debug/sentiment-analysis.csproj.CoreCompileInputs.cache
+/home/anton/CSharp/sentiment-analysis/sentiment-analysis/obj/x86/Debug/sentiment-analysis.exe
+/home/anton/CSharp/sentiment-analysis/sentiment-analysis/obj/x86/Debug/sentiment-analysis.pdb

@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+
+  # MYSQL
+  db:
+    restart: always
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: zamant
+      MYSQL_USER: zamant
+      MYSQL_PASSWORD: zamant
+      MYSQL_DATABASE: sentiment_analysis
+    volumes:
+      - database:/var/lib/mysql
+
+volumes:
+  database:
