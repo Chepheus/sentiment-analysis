@@ -1,15 +1,14 @@
 ﻿using System.IO;
 using System.Net;
-using sentimentanalysis.Config.Site;
 using sentimentanalysis.Core.Site.Entity;
 
 namespace sentimentanalysis.Core.Site
 {
     public class WebClient
     {
-        public WebPage GetPageFrom(AbstractSiteConfig siteConfig)
+        public WebPage GetPageFrom(string pageUrl)
         {
-			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(siteConfig.BaseUrl);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(pageUrl);
 			request.Method = "GET";
 			var response = (HttpWebResponse)request.GetResponse();
 

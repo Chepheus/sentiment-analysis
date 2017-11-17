@@ -12,7 +12,7 @@ namespace sentimentanalysis
         {
             AbstractSiteConfig siteConfig = new CoindeskConfig();
             Core.Site.WebClient webClient = new Core.Site.WebClient();
-            WebPage webPage = webClient.GetPageFrom(siteConfig);
+            WebPage webPage = webClient.GetPageFrom(siteConfig.BaseUrl);
 
             if (HttpStatusCode.OK == webPage.StatusCode)
             {

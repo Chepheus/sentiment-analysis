@@ -1,9 +1,10 @@
 ﻿<Properties StartupConfiguration="{40F7DC2F-CD82-41E6-9747-ADC082D03CB2}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="sentiment-analysis/Program.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="sentiment-analysis/Core/Site/WebClient.cs">
     <Files>
-      <File FileName="sentiment-analysis/Program.cs" Line="22" Column="46" />
+      <File FileName="sentiment-analysis/Program.cs" Line="15" Column="43" />
       <File FileName="sentiment-analysis/Core/Site/HtmlParser.cs" Line="20" Column="10" />
       <File FileName="sentiment-analysis/Config/Site/CoindeskConfig.cs" Line="12" Column="2" />
+      <File FileName="sentiment-analysis/Core/Site/WebClient.cs" Line="10" Column="50" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
