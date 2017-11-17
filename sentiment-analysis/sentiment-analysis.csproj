@@ -30,10 +30,32 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="AngleSharp.Io">
+      <HintPath>..\packages\AngleSharp.Io.0.3.2\lib\net45\AngleSharp.Io.dll</HintPath>
+    </Reference>
+    <Reference Include="AngleSharp">
+      <HintPath>..\packages\AngleSharp.0.9.9\lib\net45\AngleSharp.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Config\Site\CoindeskConfig.cs" />
+    <Compile Include="Config\Site\CriptoCoinsNewsConfig.cs" />
+    <Compile Include="Config\Site\AbstractSiteConfig.cs" />
+    <Compile Include="Core\Site\WebClient.cs" />
+    <Compile Include="Core\Site\Entity\WebPage.cs" />
+    <Compile Include="Core\Site\HtmlParser.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Config\" />
+    <Folder Include="Config\Site\" />
+    <Folder Include="Core\" />
+    <Folder Include="Core\Site\" />
+    <Folder Include="Core\Site\Entity\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

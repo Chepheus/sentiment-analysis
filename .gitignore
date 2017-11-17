@@ -1,0 +1,3 @@
+packages/
+sentiment-analysis/bin/Debug/*
+sentiment-analysis/obj/*
