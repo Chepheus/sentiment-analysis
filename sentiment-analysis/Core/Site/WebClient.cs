@@ -10,17 +10,22 @@ namespace sentimentanalysis.Core.Site
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(pageUrl);
 			request.Method = "GET";
-			var response = (HttpWebResponse)request.GetResponse();
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
-            using (Stream stream = response.GetResponseStream())
-            {
-                StreamReader reader = new StreamReader(stream);
+            return getWebPage(response);
+        }
 
-                string content = reader.ReadToEnd();
-                HttpStatusCode statusCode = response.StatusCode;
+        private WebPage getWebPage(HttpWebResponse response)
+        {
+			using (Stream stream = response.GetResponseStream())
+			{
+				StreamReader reader = new StreamReader(stream);
 
-                return new WebPage(content, statusCode);
-            }
+				string content = reader.ReadToEnd();
+				HttpStatusCode statusCode = response.StatusCode;
+
+				return new WebPage(content, statusCode);
+			}
         }
     }
 }

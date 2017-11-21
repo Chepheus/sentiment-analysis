@@ -46,6 +46,8 @@
     <Compile Include="Core\Site\WebClient.cs" />
     <Compile Include="Core\Site\Entity\WebPage.cs" />
     <Compile Include="Core\Site\HtmlParser.cs" />
+    <Compile Include="Core\Site\Generator\UrlGenerator.cs" />
+    <Compile Include="Core\Site\Iterator\WebPagesIterator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -56,6 +58,8 @@
     <Folder Include="Core\" />
     <Folder Include="Core\Site\" />
     <Folder Include="Core\Site\Entity\" />
+    <Folder Include="Core\Site\Generator\" />
+    <Folder Include="Core\Site\Iterator\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,8 +1,10 @@
 ﻿using System;
-using System.Net;
+using AngleSharp.Dom;
 using sentimentanalysis.Core.Site;
 using sentimentanalysis.Config.Site;
 using sentimentanalysis.Core.Site.Entity;
+using sentimentanalysis.Core.Site.Iterator;
+using sentimentanalysis.Core.Site.Generator;
 
 namespace sentimentanalysis
 {
@@ -11,20 +13,23 @@ namespace sentimentanalysis
         public static void Main(string[] args)
         {
             AbstractSiteConfig siteConfig = new CoindeskConfig();
-            Core.Site.WebClient webClient = new Core.Site.WebClient();
-            WebPage webPage = webClient.GetPageFrom(siteConfig.BaseUrl);
+            WebPagesIterator webPagesIterator = new WebPagesIterator(
+                new UrlGenerator(siteConfig)
+            );
 
-            if (HttpStatusCode.OK == webPage.StatusCode)
+            var i = 0;
+            foreach (WebPage webPage in webPagesIterator)
             {
-                HtmlParser parser = new HtmlParser(webPage);
-                var titles = parser.GetElements(siteConfig.TitleCssSelector);
-
+                HtmlParser htmlParser = new HtmlParser(webPage);
+                IHtmlCollection<IElement> titles = htmlParser.GetElements(siteConfig.TitleCssSelector);
                 foreach (var title in titles)
                 {
                     Console.WriteLine(title.TextContent);
                 }
-            }
+                i++;
 
+                if (3 == i) break;
+            }
         }
     }
 }

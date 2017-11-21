@@ -8,8 +8,6 @@
 
         protected string nextPagePostfix;
 
-        protected readonly string pageNumberTemplate;
-
         public string BaseUrl
         {
             get { return baseUrl; }
@@ -30,7 +28,6 @@
             baseUrl = "";
             nextPagePostfix = "";
             titleCssSelector = "";
-            pageNumberTemplate = "%page_num%";
         }
     }
 }

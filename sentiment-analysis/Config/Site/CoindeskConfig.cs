@@ -5,8 +5,8 @@
         public CoindeskConfig()
         {
             baseUrl = "https://www.coindesk.com/";
-            titleCssSelector = "h3";
-            nextPagePostfix = "page/" + pageNumberTemplate + "/";
+            titleCssSelector = "div:not(#coindesk_follow_us_widget-2) > h3";
+            nextPagePostfix = "page/{0}/";
         }
     }
 }

@@ -6,7 +6,7 @@
         {
             baseUrl = "https://www.cryptocoinsnews.com/news/";
             titleCssSelector = "h3.entry-title > a";
-            nextPagePostfix = "page/" + pageNumberTemplate + "/";
+            nextPagePostfix = "page/{0}/";
         }
     }
 }
