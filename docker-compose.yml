@@ -6,6 +6,9 @@ services:
   db:
     restart: always
     image: mysql
+    networks:
+      sentimental_net:
+        ipv4_address: 172.23.0.7
     environment:
       MYSQL_ROOT_PASSWORD: zamant
       MYSQL_USER: zamant
@@ -13,6 +16,15 @@ services:
       MYSQL_DATABASE: sentiment_analysis
     volumes:
       - database:/var/lib/mysql
+
+networks:
+  sentimental_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.23.0.0/24
+        gateway: 172.23.0.1
 
 volumes:
   database:

@@ -1,5 +1,6 @@
 ﻿using System;
 using AngleSharp.Dom;
+using MySql.Data.MySqlClient;
 using sentimentanalysis.Core.Site;
 using sentimentanalysis.Config.Site;
 using sentimentanalysis.Core.Site.Entity;
@@ -12,6 +13,8 @@ namespace sentimentanalysis
     {
         public static void Main(string[] args)
         {
+            MySqlConnection connection = new MySqlConnection("Database=sentiment_analysis;Data Source=172.23.0.7;User Id=zamant;Password=zamant");
+
             AbstractSiteConfig siteConfig = new CoindeskConfig();
             WebPagesIterator webPagesIterator = new WebPagesIterator(
                 new UrlGenerator(siteConfig)
