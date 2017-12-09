@@ -1,11 +1,17 @@
 ﻿using System;
 using AngleSharp.Dom;
 using MySql.Data.MySqlClient;
+using sentimentanalysis.Core;
+using sentimentanalysis.Config;
 using sentimentanalysis.Core.Site;
 using sentimentanalysis.Config.Site;
+using System.Text.RegularExpressions;
+using sentimentanalysis.Config.Database;
 using sentimentanalysis.Core.Site.Entity;
 using sentimentanalysis.Core.Site.Iterator;
 using sentimentanalysis.Core.Site.Generator;
+using sentimentanalysis.Core.Database.Entity;
+using sentimentanalysis.Core.Database.Service;
 
 namespace sentimentanalysis
 {
@@ -13,26 +19,22 @@ namespace sentimentanalysis
     {
         public static void Main(string[] args)
         {
-            MySqlConnection connection = new MySqlConnection("Database=sentiment_analysis;Data Source=172.23.0.7;User Id=zamant;Password=zamant");
+            CoreConfig config = new CoreConfig();
 
-            AbstractSiteConfig siteConfig = new CoindeskConfig();
+            MySqlConnection connection = 
+                new MySqlConnection(config.MySqlConfig.ConnectionString);
+            
+            connection.Open();
+
             WebPagesIterator webPagesIterator = new WebPagesIterator(
-                new UrlGenerator(siteConfig)
+                new UrlGenerator(config.SiteConfig)
             );
+            PostService postService = new PostService(connection);
 
-            var i = 0;
-            foreach (WebPage webPage in webPagesIterator)
-            {
-                HtmlParser htmlParser = new HtmlParser(webPage);
-                IHtmlCollection<IElement> titles = htmlParser.GetElements(siteConfig.TitleCssSelector);
-                foreach (var title in titles)
-                {
-                    Console.WriteLine(title.TextContent);
-                }
-                i++;
+            PostParser postParser = new PostParser(postService, webPagesIterator, config);
+            postParser.Parse();
 
-                if (3 == i) break;
-            }
+            connection.Close();
         }
     }
 }

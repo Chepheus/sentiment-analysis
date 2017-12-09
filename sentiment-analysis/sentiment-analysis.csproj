@@ -52,6 +52,15 @@
     <Compile Include="Core\Site\HtmlParser.cs" />
     <Compile Include="Core\Site\Generator\UrlGenerator.cs" />
     <Compile Include="Core\Site\Iterator\WebPagesIterator.cs" />
+    <Compile Include="Core\TimeParser.cs" />
+    <Compile Include="Config\CoreConfig.cs" />
+    <Compile Include="Config\Database\MySqlConfig.cs" />
+    <Compile Include="Core\Database\Service\DatabseService.cs" />
+    <Compile Include="Core\Database\Service\PostService.cs" />
+    <Compile Include="Core\Database\Entity\Post.cs" />
+    <Compile Include="Core\PostParser.cs" />
+    <Compile Include="Config\Common\TimeConfig.cs" />
+    <Compile Include="Config\Common\TextConfig.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -76,6 +85,11 @@
     <Folder Include="Core\Site\Entity\" />
     <Folder Include="Core\Site\Generator\" />
     <Folder Include="Core\Site\Iterator\" />
+    <Folder Include="Config\Database\" />
+    <Folder Include="Core\Database\" />
+    <Folder Include="Core\Database\Service\" />
+    <Folder Include="Core\Database\Entity\" />
+    <Folder Include="Config\Common\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

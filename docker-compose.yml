@@ -16,6 +16,7 @@ services:
       MYSQL_DATABASE: sentiment_analysis
     volumes:
       - database:/var/lib/mysql
+      - ./database-tables:/docker-entrypoint-initdb.d
 
 networks:
   sentimental_net:

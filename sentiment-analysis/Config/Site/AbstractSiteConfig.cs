@@ -6,6 +6,8 @@
 
         protected string titleCssSelector;
 
+        protected string timeCssSelector;
+
         protected string nextPagePostfix;
 
         public string BaseUrl
@@ -18,6 +20,11 @@
             get { return titleCssSelector; }
         }
 
+        public string TimeCssSelector
+        {
+            get { return timeCssSelector; }
+        }
+
         public string NextPageUrlTemplate
         {
             get { return BaseUrl + nextPagePostfix; }
@@ -28,6 +35,7 @@
             baseUrl = "";
             nextPagePostfix = "";
             titleCssSelector = "";
+            timeCssSelector = "";
         }
     }
 }
