@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using AngleSharp.Dom;
 using sentimentanalysis.Config;
 using sentimentanalysis.Core.Site;
@@ -28,7 +29,15 @@ namespace sentimentanalysis.Core
         {
 			foreach (WebPage webPage in webPagesIterator)
 			{
-                if (handleSavingWebPageData(webPage)) break;
+                try
+                {
+                    DateTime lastParsedTime = handleSavingWebPageData(webPage);
+                    if (isNeedToInterrupt(lastParsedTime)) break;
+                }
+                catch(WebException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
 			}
         }
 
@@ -36,12 +45,35 @@ namespace sentimentanalysis.Core
 		{
 			foreach (WebPage webPage in webPagesIterator)
 			{
-                if (handleSavingWebPageData(webPage)) break;
+                try
+                {
+                    DateTime lastParsedTime = handleSavingWebPageData(webPage);
 
-                if (start == finish) break;
+                    if (isNeedToInterrupt(lastParsedTime) || start == finish) break;
+                }
+                catch(WebException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
                 start++;
 			}
 		}
+
+        public void Parse(DateTime endTime)
+        {
+            foreach (WebPage webPage in webPagesIterator)
+            {
+                try
+                {
+                    DateTime lastParsedTime = handleSavingWebPageData(webPage);
+                    if (isNeedToInterrupt(lastParsedTime, endTime)) break;
+				}
+				catch (WebException e)
+				{
+					Console.WriteLine(e.Message);
+				}
+            }
+        }
 
         private void insertData(IHtmlCollection<IElement> titles, 
                                   IHtmlCollection<IElement> times)
@@ -49,7 +81,7 @@ namespace sentimentanalysis.Core
 			for (int i = 0, l = titles.Length; i < l; i++)
 			{
 				DateTime time = new TimeParser(times[i].GetAttribute("datetime")).GetDateTime();
-				postService.Insert(new Post(titles[i], time, config));
+                postService.Insert(new Post(titles[i].TextContent, time, config));
 			}
         }
 
@@ -59,7 +91,7 @@ namespace sentimentanalysis.Core
             return htmlParser.GetElements(selector);
         }
 
-        private bool handleSavingWebPageData(WebPage webPage)
+        private DateTime handleSavingWebPageData(WebPage webPage)
         {
 			IHtmlCollection<IElement> titles =
 					getElements(webPage, config.SiteConfig.TitleCssSelector);
@@ -69,17 +101,19 @@ namespace sentimentanalysis.Core
 
             insertData(titles, times);
 
-            return isNeedToInterrupt(times);
+			string lastPostTime = times[times.Length - 1].GetAttribute("datetime");
+			return new TimeParser(lastPostTime).GetDateTime();
         }
 
-        private bool isNeedToInterrupt(IHtmlCollection<IElement> times)
+        private bool isNeedToInterrupt(DateTime lastParsedTime)
         {
-			string lastPostTime = times[times.Length - 1].GetAttribute("datetime");
-			DateTime lastTime = new TimeParser(lastPostTime).GetDateTime();
+            DateTime startOf2k17 = config.TimeConfig.StartOf2k17;
+            return DateTime.Compare(lastParsedTime, startOf2k17) < 1;
+        }
 
-			int result = DateTime.Compare(lastTime, config.TimeConfig.StartOf2k17);
-
-            return result < 1;
+        private bool isNeedToInterrupt(DateTime lastParsedTime, DateTime untilTime)
+        {
+            return DateTime.Compare(lastParsedTime, untilTime) < 1;
         }
     }
 }

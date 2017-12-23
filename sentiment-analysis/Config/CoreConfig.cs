@@ -25,5 +25,10 @@ namespace sentimentanalysis.Config
         {
             get { return new CoindeskConfig(); }
         }
+
+        public ApiConfig ApiConfig
+        {
+            get { return new ApiConfig(); }
+        }
     }
 }

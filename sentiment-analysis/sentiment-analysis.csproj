@@ -36,10 +36,24 @@
     <Reference Include="AngleSharp">
       <HintPath>..\packages\AngleSharp.0.9.9\lib\net45\AngleSharp.dll</HintPath>
     </Reference>
-    <Reference Include="MySql.Data">
-      <HintPath>..\packages\MySql.Data.6.10.4\lib\net452\MySql.Data.dll</HintPath>
-    </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data">
+      <HintPath>..\packages\MySql.Data.6.10.5\lib\net452\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.ComponentModel" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
@@ -61,9 +75,17 @@
     <Compile Include="Core\PostParser.cs" />
     <Compile Include="Config\Common\TimeConfig.cs" />
     <Compile Include="Config\Common\TextConfig.cs" />
+    <Compile Include="Config\Site\ApiConfig.cs" />
+    <Compile Include="Core\Database\Service\CurrencyValueService.cs" />
+    <Compile Include="Core\Database\Entity\CurrencyValue.cs" />
+    <Compile Include="Core\CurrencyValueParser.cs" />
+    <Compile Include="Core\Database\Service\Common\DataFetcher.cs" />
+    <Compile Include="Core\Database\Service\Common\DataSetter.cs" />
+    <Compile Include="Core\Database\Service\Common\AbstractDatabaseHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="app.config" />
     <None Include="docs\MySqlTransaction.xml" />
     <None Include="docs\MySqlParameterCollection.xml" />
     <None Include="docs\MySqlParameter.xml" />
@@ -75,7 +97,6 @@
     <None Include="docs\MySqlConnection.xml" />
     <None Include="docs\MySqlCommandBuilder.xml" />
     <None Include="docs\MySqlCommand.xml" />
-    <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Config\" />
@@ -90,6 +111,7 @@
     <Folder Include="Core\Database\Service\" />
     <Folder Include="Core\Database\Entity\" />
     <Folder Include="Config\Common\" />
+    <Folder Include="Core\Database\Service\Common\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

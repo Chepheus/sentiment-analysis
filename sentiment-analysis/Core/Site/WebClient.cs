@@ -9,7 +9,7 @@ namespace sentimentanalysis.Core.Site
         public WebPage GetPageFrom(string pageUrl)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(pageUrl);
-			request.Method = "GET";
+            request.Method = "GET";
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
             return getWebPage(response);

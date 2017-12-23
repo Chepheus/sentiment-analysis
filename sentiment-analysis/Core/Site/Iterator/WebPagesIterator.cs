@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Net;
 using System.Collections;
-using sentimentanalysis.Core.Site;
 using sentimentanalysis.Core.Site.Entity;
 using sentimentanalysis.Core.Site.Generator;
 
@@ -11,9 +9,12 @@ namespace sentimentanalysis.Core.Site.Iterator
     {
         protected UrlGenerator urlGenerator;
 
-        public WebPagesIterator(UrlGenerator urlGenerator)
+        protected WebClient webClient;
+
+        public WebPagesIterator(UrlGenerator urlGenerator, WebClient webClient)
         {
             this.urlGenerator = urlGenerator;
+            this.webClient = webClient;
         }
 
         public IEnumerator GetEnumerator()
@@ -22,14 +23,13 @@ namespace sentimentanalysis.Core.Site.Iterator
             WebPage webPage = null;
             do
             {
-                WebClient webClient = new WebClient();
-                Console.WriteLine("Url: " + urlGenerator.GenerateUrl(pageNum));
-                webPage = webClient.GetPageFrom(urlGenerator.GenerateUrl(pageNum));
+                Console.WriteLine("Url: " + urlGenerator.GenerateNextPageUrl(pageNum));
+                webPage = webClient.GetPageFrom(urlGenerator.GenerateNextPageUrl(pageNum));
                 pageNum++;
 
                 yield return webPage;
 
-            } while (HttpStatusCode.OK == webPage.StatusCode);
+            } while (System.Net.HttpStatusCode.OK == webPage.StatusCode);
         }
     }
 }

@@ -1,14 +1,10 @@
 ﻿<Properties StartupConfiguration="{40F7DC2F-CD82-41E6-9747-ADC082D03CB2}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="sentiment-analysis/Core/Database/Service/DatabseService.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="sentiment-analysis/Core/Database/Service/CurrencyValueService.cs">
     <Files>
-      <File FileName="sentiment-analysis/Program.cs" Line="34" Column="48" />
-      <File FileName="sentiment-analysis/Core/Database/Service/PostService.cs" Line="9" Column="37" />
-      <File FileName="sentiment-analysis/Config/CoreConfig.cs" Line="16" Column="35" />
-      <File FileName="sentiment-analysis/Core/PostParser.cs" Line="62" Column="22" />
-      <File FileName="sentiment-analysis/Core/Site/Iterator/WebPagesIterator.cs" Line="28" Column="27" />
-      <File FileName="sentiment-analysis/Config/Common/TimeConfig.cs" Line="14" Column="6" />
-      <File FileName="sentiment-analysis/Config/Common/TextConfig.cs" Line="1" Column="1" />
-      <File FileName="sentiment-analysis/Core/Database/Service/DatabseService.cs" Line="8" Column="46" />
+      <File FileName="sentiment-analysis/Program.cs" Line="11" Column="28" />
+      <File FileName="sentiment-analysis/Core/PostParser.cs" Line="84" Column="32" />
+      <File FileName="sentiment-analysis/Core/Database/Service/PostService.cs" Line="50" Column="53" />
+      <File FileName="sentiment-analysis/Core/Database/Service/CurrencyValueService.cs" Line="50" Column="25" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />

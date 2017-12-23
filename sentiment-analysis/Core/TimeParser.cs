@@ -14,5 +14,16 @@ namespace sentimentanalysis.Core
         {
             return DateTime.Parse(timeString).ToUniversalTime();
         }
+
+        public DateTime ExtractDateTime()
+        {
+            string[] splitedTime = timeString.Split('-');
+
+            int year = Convert.ToInt32(splitedTime[0]);
+            int month = Convert.ToInt32(splitedTime[1]);
+            int day = Convert.ToInt32(splitedTime[2]);
+
+            return new DateTime(year, month, day);
+        }
     }
 }

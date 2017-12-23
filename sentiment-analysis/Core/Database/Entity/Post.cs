@@ -7,7 +7,7 @@ namespace sentimentanalysis.Core.Database.Entity
 {
     public class Post
     {
-        protected IElement title;
+        protected string title;
 
         protected DateTime time;
 
@@ -18,7 +18,7 @@ namespace sentimentanalysis.Core.Database.Entity
             get 
             {
                 return Regex.Replace(
-                    title.TextContent.Trim(),
+                    title.Trim(),
                     config.TextConfig.TextFilter,
                     " "
                 );
@@ -30,7 +30,12 @@ namespace sentimentanalysis.Core.Database.Entity
             get { return time.ToString(config.TimeConfig.TimeFormat); }
         }
 
-        public Post(IElement title, DateTime time, CoreConfig config)
+        public DateTime DateTime
+        {
+            get { return time; }
+        }
+
+        public Post(string title, DateTime time, CoreConfig config)
         {
             this.title = title;
             this.time = time;

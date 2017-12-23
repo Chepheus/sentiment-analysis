@@ -1,17 +1,12 @@
-﻿using System;
-using AngleSharp.Dom;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using sentimentanalysis.Core;
 using sentimentanalysis.Config;
 using sentimentanalysis.Core.Site;
-using sentimentanalysis.Config.Site;
-using System.Text.RegularExpressions;
-using sentimentanalysis.Config.Database;
-using sentimentanalysis.Core.Site.Entity;
 using sentimentanalysis.Core.Site.Iterator;
 using sentimentanalysis.Core.Site.Generator;
 using sentimentanalysis.Core.Database.Entity;
 using sentimentanalysis.Core.Database.Service;
+using sentimentanalysis.Core.Database.Service.Common;
 
 namespace sentimentanalysis
 {
@@ -20,19 +15,49 @@ namespace sentimentanalysis
         public static void Main(string[] args)
         {
             CoreConfig config = new CoreConfig();
+            WebClient webClient = new WebClient();
 
             MySqlConnection connection = 
                 new MySqlConnection(config.MySqlConfig.ConnectionString);
-            
+                            
             connection.Open();
 
-            WebPagesIterator webPagesIterator = new WebPagesIterator(
-                new UrlGenerator(config.SiteConfig)
-            );
-            PostService postService = new PostService(connection);
+            DataSetter setter = new DataSetter(connection);
+            DataFetcher fetcher = new DataFetcher(connection);
 
+			UrlGenerator urlGenerator = new UrlGenerator(config);
+            WebPagesIterator webPagesIterator = new WebPagesIterator(
+                urlGenerator, webClient
+            );
+            PostService postService = new PostService(setter, fetcher);
+            CurrencyValueService currencyValueService = new CurrencyValueService(setter, fetcher);
+
+            Post post = postService.SelectLastRecord(config);
             PostParser postParser = new PostParser(postService, webPagesIterator, config);
-            postParser.Parse();
+
+            if (null != post)
+            {
+                postParser.Parse(post.DateTime);
+            }
+            else
+            {
+                postParser.Parse();    
+            }
+
+            CurrencyValue currencyValue = currencyValueService.SelectLastRecord(config);
+            CurrencyValueParser currencyValueParser = 
+                new CurrencyValueParser(webClient, urlGenerator, currencyValueService, config);
+
+            if (null != currencyValue)
+            {
+                currencyValueParser.Parse(
+                    currencyValue.DateTime, config.TimeConfig.EndOf2k17
+                );
+            }
+            else
+            {
+                currencyValueParser.Parse();
+            }
 
             connection.Close();
         }
