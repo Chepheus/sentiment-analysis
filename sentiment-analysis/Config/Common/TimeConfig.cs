@@ -22,5 +22,10 @@ namespace sentimentanalysis.Config.Common
         {
             get { return new DateTime(2017, 12, 31); }
         }
+
+        public int DayScatter
+        {
+            get { return 7; }
+        }
     }
 }

@@ -82,6 +82,13 @@
     <Compile Include="Core\Database\Service\Common\DataFetcher.cs" />
     <Compile Include="Core\Database\Service\Common\DataSetter.cs" />
     <Compile Include="Core\Database\Service\Common\AbstractDatabaseHandler.cs" />
+    <Compile Include="Core\Database\Service\PostExtremumService.cs" />
+    <Compile Include="Core\Database\Entity\PostExtremum.cs" />
+    <Compile Include="Core\Database\Entity\Extremum.cs" />
+    <Compile Include="Core\Analysis\Analizators\GrowthAnalizator.cs" />
+    <Compile Include="Core\Analysis\Analizators\AbstractAnalizator.cs" />
+    <Compile Include="Core\Analysis\Analizators\AnalizatorFactory.cs" />
+    <Compile Include="Core\Parser.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -112,6 +119,8 @@
     <Folder Include="Core\Database\Entity\" />
     <Folder Include="Config\Common\" />
     <Folder Include="Core\Database\Service\Common\" />
+    <Folder Include="Core\Analysis\" />
+    <Folder Include="Core\Analysis\Analizators\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

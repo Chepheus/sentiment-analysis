@@ -1,12 +1,10 @@
 ﻿using MySql.Data.MySqlClient;
 using sentimentanalysis.Core;
 using sentimentanalysis.Config;
-using sentimentanalysis.Core.Site;
-using sentimentanalysis.Core.Site.Iterator;
-using sentimentanalysis.Core.Site.Generator;
 using sentimentanalysis.Core.Database.Entity;
 using sentimentanalysis.Core.Database.Service;
 using sentimentanalysis.Core.Database.Service.Common;
+using sentimentanalysis.Core.Analysis.Analizators;
 
 namespace sentimentanalysis
 {
@@ -15,7 +13,6 @@ namespace sentimentanalysis
         public static void Main(string[] args)
         {
             CoreConfig config = new CoreConfig();
-            WebClient webClient = new WebClient();
 
             MySqlConnection connection = 
                 new MySqlConnection(config.MySqlConfig.ConnectionString);
@@ -25,39 +22,17 @@ namespace sentimentanalysis
             DataSetter setter = new DataSetter(connection);
             DataFetcher fetcher = new DataFetcher(connection);
 
-			UrlGenerator urlGenerator = new UrlGenerator(config);
-            WebPagesIterator webPagesIterator = new WebPagesIterator(
-                urlGenerator, webClient
-            );
             PostService postService = new PostService(setter, fetcher);
             CurrencyValueService currencyValueService = new CurrencyValueService(setter, fetcher);
+            PostExtremumService postExtremumService = new PostExtremumService(setter, fetcher);
 
-            Post post = postService.SelectLastRecord(config);
-            PostParser postParser = new PostParser(postService, webPagesIterator, config);
+            Parser parser = new Parser(postService, currencyValueService, config);
+            parser.Parse();
 
-            if (null != post)
-            {
-                postParser.Parse(post.DateTime);
-            }
-            else
-            {
-                postParser.Parse();    
-            }
-
-            CurrencyValue currencyValue = currencyValueService.SelectLastRecord(config);
-            CurrencyValueParser currencyValueParser = 
-                new CurrencyValueParser(webClient, urlGenerator, currencyValueService, config);
-
-            if (null != currencyValue)
-            {
-                currencyValueParser.Parse(
-                    currencyValue.DateTime, config.TimeConfig.EndOf2k17
-                );
-            }
-            else
-            {
-                currencyValueParser.Parse();
-            }
+            AnalizatorFactory analizatorFactory = 
+                new AnalizatorFactory(postService, currencyValueService, postExtremumService);
+            
+            analizatorFactory.GetAnalizator(Extremum.FROM_FALL_TO_GROWTH).Analize(config);
 
             connection.Close();
         }

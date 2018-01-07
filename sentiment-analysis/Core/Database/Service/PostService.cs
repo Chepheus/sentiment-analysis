@@ -25,7 +25,6 @@ namespace sentimentanalysis.Core.Database.Service
                 string query = "(title, post_date) VALUES(\"{0}\", \"{1}\")";
                 string preparedSql = String.Format(query, post.Title, post.Time);
 
-                Console.WriteLine(_insert(preparedSql));
                 setter.Insert(_insert(preparedSql));
             }
             catch (Exception e)
@@ -64,6 +63,35 @@ namespace sentimentanalysis.Core.Database.Service
             }
 
             return null;
+        }
+
+        public List<Post> GetPostsByDate(DateTime time, CoreConfig config)
+        {
+            TimeSpan week = new TimeSpan(config.TimeConfig.DayScatter, 0, 0, 0);
+            string select = String.Format(
+                "WHERE post_date BETWEEN \"{0}\" AND \"{1}\"", 
+                time.Subtract(week).ToString(config.TimeConfig.TimeFormat), 
+                time.Add(week).ToString(config.TimeConfig.TimeFormat)
+            );
+			string[] fields = new string[] { "post_id", "title", "post_date" };
+
+            Console.WriteLine(_select(select));
+			List<Dictionary<string, object>> result = fetcher.Fetch(_select(select), fields);
+            List<Post> posts = new List<Post>();
+
+            foreach(Dictionary<string, object> rowPost in result)
+            {
+				posts.Add(
+                    new Post(
+                        Convert.ToInt32(rowPost["post_id"]),
+                        rowPost["title"].ToString(),
+    					DateTime.Parse(rowPost["post_date"].ToString()),
+    					config
+                    )
+                );
+            }
+
+            return posts;
         }
     }
 }

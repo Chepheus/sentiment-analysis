@@ -1,10 +1,16 @@
 ﻿<Properties StartupConfiguration="{40F7DC2F-CD82-41E6-9747-ADC082D03CB2}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="sentiment-analysis/Core/Database/Service/CurrencyValueService.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="sentiment-analysis/Core/Database/Entity/CurrencyValue.cs">
     <Files>
-      <File FileName="sentiment-analysis/Program.cs" Line="11" Column="28" />
-      <File FileName="sentiment-analysis/Core/PostParser.cs" Line="84" Column="32" />
-      <File FileName="sentiment-analysis/Core/Database/Service/PostService.cs" Line="50" Column="53" />
-      <File FileName="sentiment-analysis/Core/Database/Service/CurrencyValueService.cs" Line="50" Column="25" />
+      <File FileName="sentiment-analysis/Program.cs" Line="35" Column="78" />
+      <File FileName="sentiment-analysis/Core/Database/Service/CurrencyValueService.cs" Line="71" Column="17" />
+      <File FileName="sentiment-analysis/Core/Database/Service/PostService.cs" Line="44" Column="1" />
+      <File FileName="sentiment-analysis/Core/Database/Service/PostExtremumService.cs" Line="3" Column="46" />
+      <File FileName="sentiment-analysis/Core/Analysis/Analizators/GrowthAnalizator.cs" Line="39" Column="34" />
+      <File FileName="sentiment-analysis/Core/Analysis/Analizators/AnalizatorFactory.cs" Line="22" Column="60" />
+      <File FileName="sentiment-analysis/Core/Analysis/Analizators/AbstractAnalizator.cs" Line="35" Column="17" />
+      <File FileName="sentiment-analysis/Core/Parser.cs" Line="21" Column="65" />
+      <File FileName="sentiment-analysis/Core/Database/Entity/PostExtremum.cs" Line="7" Column="27" />
+      <File FileName="sentiment-analysis/Core/Database/Entity/CurrencyValue.cs" Line="39" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />

@@ -80,8 +80,13 @@ namespace sentimentanalysis.Core
         {
 			for (int i = 0, l = titles.Length; i < l; i++)
 			{
-				DateTime time = new TimeParser(times[i].GetAttribute("datetime")).GetDateTime();
-                postService.Insert(new Post(titles[i].TextContent, time, config));
+                string timeString = times[i].GetAttribute("datetime");
+                string title = titles[i].TextContent;
+
+                if (0 == timeString.Length || 0 == title.Length) continue;
+
+                DateTime time = new TimeParser(timeString).GetDateTime();
+                postService.Insert(new Post(title, time, config));
 			}
         }
 

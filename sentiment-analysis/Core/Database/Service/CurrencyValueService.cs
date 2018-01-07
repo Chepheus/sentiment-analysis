@@ -65,5 +65,13 @@ namespace sentimentanalysis.Core.Database.Service
 
 			return null;
 		}
+
+        public List<Dictionary<string, object>> SelectAll(CoreConfig config)
+        {
+			string select = "ORDER BY close_date ASC";
+			string[] fields = new string[] { "value_id", "value", "close_date" };
+
+			return fetcher.Fetch(_select(select), fields);
+        }
     }
 }
