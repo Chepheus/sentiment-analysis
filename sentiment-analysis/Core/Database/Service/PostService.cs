@@ -41,6 +41,7 @@ namespace sentimentanalysis.Core.Database.Service
 
             List<Dictionary<string, object>> result = 
                 fetcher.Fetch(_select(preparedSql), fields);
+            
             return result.Count > 0;
         }
 

@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using System;
+using MySql.Data.MySqlClient;
 using sentimentanalysis.Core;
 using sentimentanalysis.Config;
 using sentimentanalysis.Core.Database.Entity;
@@ -25,15 +26,28 @@ namespace sentimentanalysis
             PostService postService = new PostService(setter, fetcher);
             CurrencyValueService currencyValueService = new CurrencyValueService(setter, fetcher);
             PostExtremumService postExtremumService = new PostExtremumService(setter, fetcher);
+            WordsService wordService = new WordsService(setter, fetcher);
+            PostWordService postWordService = new PostWordService(setter, fetcher);
+            WordsFilterService wordsFilterService = new WordsFilterService(
+                setter, fetcher, wordService, postWordService, postExtremumService
+            );
 
-            Parser parser = new Parser(postService, currencyValueService, config);
-            parser.Parse();
+			/********** I **********/
+			//Parser parser = new Parser(postService, currencyValueService, config);
+			//parser.Parse();
+			/********** I **********/
 
-            AnalizatorFactory analizatorFactory = 
-                new AnalizatorFactory(postService, currencyValueService, postExtremumService);
-            
-            analizatorFactory.GetAnalizator(Extremum.FROM_FALL_TO_GROWTH).Analize(config);
+			/********** II **********/
+			//AnalizatorFactory analizatorFactory = 
+			//    new AnalizatorFactory(postService, currencyValueService, postExtremumService);
 
+            //analizatorFactory.GetAnalizator(Extremum.SHARP_GROWTH).Analize(config);
+			/********** II **********/
+
+			/********** III **********/
+			wordsFilterService.InsertFilteredWords();
+			/********** III **********/
+			
             connection.Close();
         }
     }

@@ -89,6 +89,15 @@
     <Compile Include="Core\Analysis\Analizators\AbstractAnalizator.cs" />
     <Compile Include="Core\Analysis\Analizators\AnalizatorFactory.cs" />
     <Compile Include="Core\Parser.cs" />
+    <Compile Include="Core\Database\Service\WordsService.cs" />
+    <Compile Include="Core\Database\Entity\Word.cs" />
+    <Compile Include="Core\Database\Entity\PostWord.cs" />
+    <Compile Include="Core\Database\Service\PostWordService.cs" />
+    <Compile Include="Core\Database\Entity\WordsFilter.cs" />
+    <Compile Include="Core\Database\Service\WordsFilterService.cs" />
+    <Compile Include="Core\Analysis\Analizators\FallAnalizator.cs" />
+    <Compile Include="Core\Analysis\Analizators\SharpGrowthAnalizator.cs" />
+    <Compile Include="Core\Analysis\Analizators\SharpFallAnalizator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -49,5 +49,13 @@ namespace sentimentanalysis.Core.Database.Service
             
 			return result.Count > 0;
 		}
+
+		public List<Dictionary<string, object>> SelectAllRelatedPosts()
+		{
+			string select = "INNER JOIN posts ON posts.post_id = post_extremum.post_id";
+			string[] fields = new string[] { "post_id", "title", "value_id", "extremum_id" };
+
+			return fetcher.Fetch(_select(select), fields);
+		}
 	}
 }

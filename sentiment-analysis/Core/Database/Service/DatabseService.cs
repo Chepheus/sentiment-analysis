@@ -15,6 +15,11 @@ namespace sentimentanalysis.Core.Database.Service
             this.setter = setter;
         }
 
+		public long GetLastInsertedId()
+		{
+			return setter.GetLastInsertedId();
+		}
+
         protected abstract string getTableName();
 
         protected string _insert(string inserBody)

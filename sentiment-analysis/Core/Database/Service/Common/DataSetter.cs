@@ -11,5 +11,10 @@ namespace sentimentanalysis.Core.Database.Service.Common
 			command.CommandText = sql;
 			command.ExecuteNonQuery();
         }
+
+        public long GetLastInsertedId()
+        {
+            return command.LastInsertedId;
+        }
     }
 }

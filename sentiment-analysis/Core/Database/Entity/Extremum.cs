@@ -4,8 +4,8 @@
     {
         public const int FROM_GROWTH_TO_FALL = 1;
         public const int FROM_FALL_TO_GROWTH = 2;
-        public const int SHARP_RISE_IN_GROWTH = 3;
-        public const int SHARP_RISE_IN_DROP = 4;
+        public const int SHARP_GROWTH = 3;
+        public const int SHARP_FALL = 4;
 
         protected int extremum_id;
 

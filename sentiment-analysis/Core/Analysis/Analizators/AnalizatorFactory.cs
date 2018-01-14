@@ -1,5 +1,4 @@
-﻿using sentimentanalysis.Config;
-using sentimentanalysis.Core.Database.Entity;
+﻿using sentimentanalysis.Core.Database.Entity;
 using sentimentanalysis.Core.Database.Service;
 
 namespace sentimentanalysis.Core.Analysis.Analizators
@@ -28,6 +27,25 @@ namespace sentimentanalysis.Core.Analysis.Analizators
                         this.postService,
                         this.currencyValueService,
                         this.postExtremumService
+                    );
+
+                case Extremum.FROM_GROWTH_TO_FALL:
+                    return new FallAnalizator(
+						this.postService,
+						this.currencyValueService,
+						this.postExtremumService
+                    );
+                case Extremum.SHARP_GROWTH:
+                    return new SharpGrowthAnalizator(
+						this.postService,
+						this.currencyValueService,
+						this.postExtremumService
+                    );
+                case Extremum.SHARP_FALL:
+                    return new SharpFallAnalizator(
+						this.postService,
+						this.currencyValueService,
+						this.postExtremumService
                     );
 			}
 

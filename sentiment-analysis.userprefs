@@ -1,16 +1,15 @@
 ﻿<Properties StartupConfiguration="{40F7DC2F-CD82-41E6-9747-ADC082D03CB2}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="sentiment-analysis/Core/Database/Entity/CurrencyValue.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="sentiment-analysis/Core/Analysis/Analizators/AnalizatorFactory.cs">
     <Files>
-      <File FileName="sentiment-analysis/Program.cs" Line="35" Column="78" />
-      <File FileName="sentiment-analysis/Core/Database/Service/CurrencyValueService.cs" Line="71" Column="17" />
-      <File FileName="sentiment-analysis/Core/Database/Service/PostService.cs" Line="44" Column="1" />
-      <File FileName="sentiment-analysis/Core/Database/Service/PostExtremumService.cs" Line="3" Column="46" />
-      <File FileName="sentiment-analysis/Core/Analysis/Analizators/GrowthAnalizator.cs" Line="39" Column="34" />
-      <File FileName="sentiment-analysis/Core/Analysis/Analizators/AnalizatorFactory.cs" Line="22" Column="60" />
-      <File FileName="sentiment-analysis/Core/Analysis/Analizators/AbstractAnalizator.cs" Line="35" Column="17" />
-      <File FileName="sentiment-analysis/Core/Parser.cs" Line="21" Column="65" />
-      <File FileName="sentiment-analysis/Core/Database/Entity/PostExtremum.cs" Line="7" Column="27" />
-      <File FileName="sentiment-analysis/Core/Database/Entity/CurrencyValue.cs" Line="39" Column="4" />
+      <File FileName="sentiment-analysis/Program.cs" Line="44" Column="37" />
+      <File FileName="sentiment-analysis/Core/Database/Entity/WordsFilter.cs" Line="14" Column="30" />
+      <File FileName="sentiment-analysis/Core/Database/Service/WordsFilterService.cs" Line="64" Column="21" />
+      <File FileName="sentiment-analysis/Core/Database/Entity/Extremum.cs" Line="10" Column="35" />
+      <File FileName="sentiment-analysis/Core/Analysis/Analizators/SharpGrowthAnalizator.cs" Line="10" Column="53" />
+      <File FileName="sentiment-analysis/Core/Analysis/Analizators/GrowthAnalizator.cs" Line="10" Column="72" />
+      <File FileName="sentiment-analysis/Core/Analysis/Analizators/AbstractAnalizator.cs" Line="24" Column="15" />
+      <File FileName="sentiment-analysis/Core/Analysis/Analizators/AnalizatorFactory.cs" Line="40" Column="36" />
+      <File FileName="sentiment-analysis/Core/Analysis/Analizators/SharpFallAnalizator.cs" Line="24" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
