@@ -54,6 +54,13 @@
     <Reference Include="System.Runtime" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Xml" />
+    <Reference Include="RestSharp">
+      <HintPath>..\packages\RestSharp.105.2.3\lib\net46\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Telegram.Bot">
+      <HintPath>..\packages\Telegram.Bot.13.4.0\lib\net45\Telegram.Bot.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
@@ -98,6 +105,11 @@
     <Compile Include="Core\Analysis\Analizators\FallAnalizator.cs" />
     <Compile Include="Core\Analysis\Analizators\SharpGrowthAnalizator.cs" />
     <Compile Include="Core\Analysis\Analizators\SharpFallAnalizator.cs" />
+    <Compile Include="Core\Database\Service\ConfigService.cs" />
+    <Compile Include="Core\Database\Entity\ConfigEntity.cs" />
+    <Compile Include="Core\LastTimeParseLogger.cs" />
+    <Compile Include="Core\Analysis\InputPostAnalisator.cs" />
+    <Compile Include="Core\Analysis\Service\SentimentCoeficientCalculator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -130,6 +142,7 @@
     <Folder Include="Core\Database\Service\Common\" />
     <Folder Include="Core\Analysis\" />
     <Folder Include="Core\Analysis\Analizators\" />
+    <Folder Include="Core\Analysis\Service\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

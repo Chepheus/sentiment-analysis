@@ -18,14 +18,14 @@ namespace sentimentanalysis.Config.Common
             get { return new DateTime(2017, 1, 1); }
         }
 
-        public DateTime EndOf2k17
+        public DateTime EndOfDate
         {
-            get { return new DateTime(2017, 12, 31); }
+            get { return new DateTime(2100, 12, 31); }
         }
 
         public int DayScatter
         {
-            get { return 7; }
+            get { return 1; }
         }
     }
 }

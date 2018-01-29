@@ -68,31 +68,47 @@ namespace sentimentanalysis.Core.Database.Service
 
         public List<Post> GetPostsByDate(DateTime time, CoreConfig config)
         {
-            TimeSpan week = new TimeSpan(config.TimeConfig.DayScatter, 0, 0, 0);
+            TimeSpan dayScatter = new TimeSpan(config.TimeConfig.DayScatter, 0, 0, 0);
             string select = String.Format(
                 "WHERE post_date BETWEEN \"{0}\" AND \"{1}\"", 
-                time.Subtract(week).ToString(config.TimeConfig.TimeFormat), 
-                time.Add(week).ToString(config.TimeConfig.TimeFormat)
+                time.Subtract(dayScatter).ToString(config.TimeConfig.TimeFormat), 
+                time.Add(dayScatter).ToString(config.TimeConfig.TimeFormat)
             );
+
+            return _fetchPosts(select, config);
+        }
+
+		public List<Post> GetPostsSinceDate(DateTime time, CoreConfig config)
+		{
+			string select = String.Format(
+				"WHERE post_date > \"{0}\"",
+				time.ToString(config.TimeConfig.TimeFormat)
+			);
+
+            return _fetchPosts(select, config);
+		}
+
+        private List<Post> _fetchPosts(string select, CoreConfig config)
+        {
 			string[] fields = new string[] { "post_id", "title", "post_date" };
 
-            Console.WriteLine(_select(select));
+			Console.WriteLine(_select(select));
 			List<Dictionary<string, object>> result = fetcher.Fetch(_select(select), fields);
-            List<Post> posts = new List<Post>();
+			List<Post> posts = new List<Post>();
 
-            foreach(Dictionary<string, object> rowPost in result)
-            {
+			foreach (Dictionary<string, object> rowPost in result)
+			{
 				posts.Add(
-                    new Post(
-                        Convert.ToInt32(rowPost["post_id"]),
-                        rowPost["title"].ToString(),
-    					DateTime.Parse(rowPost["post_date"].ToString()),
-    					config
-                    )
-                );
-            }
+					new Post(
+						Convert.ToInt32(rowPost["post_id"]),
+						rowPost["title"].ToString(),
+						DateTime.Parse(rowPost["post_date"].ToString()),
+						config
+					)
+				);
+			}
 
-            return posts;
+			return posts;
         }
     }
 }

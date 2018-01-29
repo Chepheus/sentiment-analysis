@@ -50,7 +50,7 @@ namespace sentimentanalysis.Core
 			if (null != currencyValue)
 			{
 				currencyValueParser.Parse(
-					currencyValue.DateTime, config.TimeConfig.EndOf2k17
+					currencyValue.DateTime, config.TimeConfig.EndOfDate
 				);
 			}
 			else

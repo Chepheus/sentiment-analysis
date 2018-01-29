@@ -25,7 +25,7 @@ namespace sentimentanalysis.Core.Site.Generator
 
 			string template = config.ApiConfig.DateRangeUrlTemplate;
             string startDate = timeConfig.StartOf2k17.ToString(timeConfig.ApiTimeFormat);
-            string endDate = timeConfig.EndOf2k17.ToString(timeConfig.ApiTimeFormat);
+            string endDate = timeConfig.EndOfDate.ToString(timeConfig.ApiTimeFormat);
 
 			return String.Format(template, startDate, endDate);
 		}

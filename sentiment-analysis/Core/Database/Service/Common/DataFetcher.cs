@@ -25,6 +25,12 @@ namespace sentimentanalysis.Core.Database.Service.Common
 			return result;
 		}
 
+        public object Scalar(string sql)
+        {
+			command.CommandText = sql;
+            return command.ExecuteScalar();
+        }
+
 		private Dictionary<string, object> getLine(MySqlDataReader reader, string[] fields)
 		{
 			Dictionary<string, object> line = new Dictionary<string, object>();

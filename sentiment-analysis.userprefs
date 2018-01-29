@@ -1,15 +1,14 @@
 ﻿<Properties StartupConfiguration="{40F7DC2F-CD82-41E6-9747-ADC082D03CB2}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="sentiment-analysis/Core/Analysis/Analizators/AnalizatorFactory.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="sentiment-analysis/Core/Parser.cs">
     <Files>
-      <File FileName="sentiment-analysis/Program.cs" Line="44" Column="37" />
-      <File FileName="sentiment-analysis/Core/Database/Entity/WordsFilter.cs" Line="14" Column="30" />
-      <File FileName="sentiment-analysis/Core/Database/Service/WordsFilterService.cs" Line="64" Column="21" />
-      <File FileName="sentiment-analysis/Core/Database/Entity/Extremum.cs" Line="10" Column="35" />
-      <File FileName="sentiment-analysis/Core/Analysis/Analizators/SharpGrowthAnalizator.cs" Line="10" Column="53" />
-      <File FileName="sentiment-analysis/Core/Analysis/Analizators/GrowthAnalizator.cs" Line="10" Column="72" />
-      <File FileName="sentiment-analysis/Core/Analysis/Analizators/AbstractAnalizator.cs" Line="24" Column="15" />
-      <File FileName="sentiment-analysis/Core/Analysis/Analizators/AnalizatorFactory.cs" Line="40" Column="36" />
-      <File FileName="sentiment-analysis/Core/Analysis/Analizators/SharpFallAnalizator.cs" Line="24" Column="1" />
+      <File FileName="sentiment-analysis/Program.cs" Line="47" Column="15" />
+      <File FileName="sentiment-analysis/Core/Analysis/InputPostAnalisator.cs" Line="27" Column="61" />
+      <File FileName="sentiment-analysis/Core/Analysis/Service/SentimentCoeficientCalculator.cs" Line="23" Column="64" />
+      <File FileName="sentiment-analysis/Core/Database/Service/PostService.cs" Line="75" Column="76" />
+      <File FileName="sentiment-analysis/Core/Analysis/Analizators/AbstractAnalizator.cs" Line="57" Column="29" />
+      <File FileName="sentiment-analysis/Config/Common/TimeConfig.cs" Line="28" Column="27" />
+      <File FileName="sentiment-analysis/Core/Database/Service/PostExtremumService.cs" Line="25" Column="52" />
+      <File FileName="sentiment-analysis/Core/Parser.cs" Line="32" Column="21" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />

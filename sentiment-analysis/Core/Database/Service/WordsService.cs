@@ -42,5 +42,19 @@ namespace sentimentanalysis.Core.Database.Service
 
 			return result.Count > 0;
 		}
+
+		public int Count(Word word)
+		{
+            string select = "SELECT COUNT(*) as word_count " +
+                "FROM {0} WHERE word = \"{1}\" AND is_positive = {2}";
+            
+			string preparedSql =
+                String.Format(select, getTableName(), word.Value, Convert.ToInt32(word.IsPositive));
+
+            object result =
+                fetcher.Scalar(preparedSql);
+
+            return Convert.ToInt32(result);
+		}
     }
 }

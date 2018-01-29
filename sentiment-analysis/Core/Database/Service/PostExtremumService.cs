@@ -57,5 +57,32 @@ namespace sentimentanalysis.Core.Database.Service
 
 			return fetcher.Fetch(_select(select), fields);
 		}
+
+        public int Count(bool isPositive)
+        {
+            string select = "SELECT COUNT(*) FROM {0} WHERE extremum_id = {1} OR extremum_id = {2}";
+            string preparedSql;
+
+            if (isPositive)
+            {
+                preparedSql = String.Format(
+                    select,
+                    getTableName(),
+                    Extremum.FROM_FALL_TO_GROWTH,
+                    Extremum.SHARP_GROWTH
+                );
+            }
+            else 
+            {
+				preparedSql = String.Format(
+                    select,
+					getTableName(),
+                    Extremum.FROM_GROWTH_TO_FALL,
+                    Extremum.SHARP_FALL
+                );
+            }
+
+            return Convert.ToInt32(fetcher.Scalar(preparedSql));
+        }
 	}
 }
