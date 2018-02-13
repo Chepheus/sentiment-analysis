@@ -30,5 +30,10 @@ namespace sentimentanalysis.Config
         {
             get { return new ApiConfig(); }
         }
+
+        public TelegramConfig TelegramConfig
+        {
+            get { return new TelegramConfig(); }
+        }
     }
 }

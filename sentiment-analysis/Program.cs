@@ -40,6 +40,10 @@ namespace sentimentanalysis
             );
             ConfigService configService = new ConfigService(setter, fetcher);
 
+			SentimentCoeficientCalculator calcuator =
+				new SentimentCoeficientCalculator(wordService, postExtremumService);
+            InputPostAnalisator inputPostAnalizator = new InputPostAnalisator(calcuator);
+
 			/********** I **********/
 			//Parser parser = new Parser(postService, currencyValueService, config);
 			//LastTimeParseLogger ltParser = new LastTimeParseLogger(parser, configService, postService, config);
@@ -52,11 +56,11 @@ namespace sentimentanalysis
 			//AnalizatorFactory analizatorFactory = 
 			//    new AnalizatorFactory(postService, currencyValueService, postExtremumService);
 
-            //analizatorFactory.GetAnalizator(Extremum.FROM_FALL_TO_GROWTH).Analize(config);
-            //analizatorFactory.GetAnalizator(Extremum.SHARP_GROWTH).Analize(config);
+			//analizatorFactory.GetAnalizator(Extremum.FROM_FALL_TO_GROWTH).Analize(config);
+			//analizatorFactory.GetAnalizator(Extremum.SHARP_GROWTH).Analize(config);
 
-            //analizatorFactory.GetAnalizator(Extremum.FROM_GROWTH_TO_FALL).Analize(config);
-            //analizatorFactory.GetAnalizator(Extremum.SHARP_FALL).Analize(config);
+			//analizatorFactory.GetAnalizator(Extremum.FROM_GROWTH_TO_FALL).Analize(config);
+			//analizatorFactory.GetAnalizator(Extremum.SHARP_FALL).Analize(config);
 			/********** II **********/
 
 			/********** III **********/
@@ -64,21 +68,19 @@ namespace sentimentanalysis
 			//wordsFilterService.InsertFilteredWords();
 			/********** III **********/
 
+			/********** IV **********/
+			//ConfigEntity lastPostTime = configService.Get(ConfigEntity.LAST_POST_TIME);
+            //TimeParser timeParser = new TimeParser(lastPostTime.Value);
+            //List<Post> posts = postService.GetPostsSinceDate(timeParser.GetDateTime(), config);
 
-            ConfigEntity lastPostTime = configService.Get(ConfigEntity.LAST_POST_TIME);
-            TimeParser timeParser = new TimeParser(lastPostTime.Value);
-            List<Post> posts = postService.GetPostsSinceDate(timeParser.GetDateTime(), config);
-            SentimentCoeficientCalculator calcuator =
-                new SentimentCoeficientCalculator(wordService, postExtremumService);
-            InputPostAnalisator inputPostAnalizator = new InputPostAnalisator(calcuator);
+            //Dictionary<Post, float> estimatedPosts = inputPostAnalizator.GetPosts(posts);
 
-            Dictionary<Post, float> estimatedPosts = inputPostAnalizator.GetPosts(posts);
+            //IEnumerable<KeyValuePair<Post, float>> orderedEstimatedPosts = estimatedPosts.Where(pair => Math.Abs(pair.Value) >= 0.02);
+            //TelegramSender telegramSender = new TelegramSender(config);
+            //List<Task<Message>> taskList = telegramSender.SendEstimatedPosts(orderedEstimatedPosts);
 
-            var orderedEstimatedPosts = estimatedPosts.OrderBy(pair => pair.Value).Take(5);
-            foreach(KeyValuePair<Post, float> estimatedPost in orderedEstimatedPosts)
-            {
-                Console.WriteLine("{0}: {1}", estimatedPost.Key.Title, estimatedPost.Value);
-            }
+            //Task.WaitAll(taskList.ToArray());
+			/********** IV **********/
 
 			connection.Close();
         }

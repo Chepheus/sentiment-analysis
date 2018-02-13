@@ -75,18 +75,20 @@ namespace sentimentanalysis.Core
             }
         }
 
-        private void insertData(IHtmlCollection<IElement> titles, 
-                                  IHtmlCollection<IElement> times)
+        private void insertData(IHtmlCollection<IElement> titles,
+                                  IHtmlCollection<IElement> times, 
+                                IHtmlCollection<IElement> hrefs)
         {
 			for (int i = 0, l = titles.Length; i < l; i++)
 			{
                 string timeString = times[i].GetAttribute("datetime");
                 string title = titles[i].TextContent;
+                string href = hrefs[i].GetAttribute("href");
 
                 if (0 == timeString.Length || 0 == title.Length) continue;
 
                 DateTime time = new TimeParser(timeString).GetDateTime();
-                postService.Insert(new Post(title, time, config));
+                postService.Insert(new Post(title, href, time, config));
 			}
         }
 
@@ -104,7 +106,9 @@ namespace sentimentanalysis.Core
 			IHtmlCollection<IElement> times =
 				getElements(webPage, config.SiteConfig.TimeCssSelector);
 
-            insertData(titles, times);
+            IHtmlCollection<IElement> hrefs = getElements(webPage, config.SiteConfig.HrefCssSelector);
+
+            insertData(titles, times, hrefs);
 
 			string lastPostTime = times[times.Length - 1].GetAttribute("datetime");
 			return new TimeParser(lastPostTime).GetDateTime();

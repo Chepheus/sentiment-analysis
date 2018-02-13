@@ -22,8 +22,8 @@ namespace sentimentanalysis.Core.Database.Service
             {
                 if (Isset(post)) return;
 
-                string query = "(title, post_date) VALUES(\"{0}\", \"{1}\")";
-                string preparedSql = String.Format(query, post.Title, post.Time);
+                string query = "(title, href, post_date) VALUES(\"{0}\", \"{1}\", \"{2}\")";
+                string preparedSql = String.Format(query, post.Title, post.Href, post.Time);
 
                 setter.Insert(_insert(preparedSql));
             }
@@ -37,7 +37,7 @@ namespace sentimentanalysis.Core.Database.Service
         {
             string select = "WHERE title = \"{0}\" AND post_date = \"{1}\"";
 			string preparedSql = String.Format(select, post.Title, post.Time);
-            string[] fields = new string[] {"post_id", "title", "post_date" };
+            string[] fields = new string[] {"post_id", "title", "href", "post_date" };
 
             List<Dictionary<string, object>> result = 
                 fetcher.Fetch(_select(preparedSql), fields);
@@ -48,7 +48,7 @@ namespace sentimentanalysis.Core.Database.Service
         public Post SelectLastRecord(CoreConfig config)
         {
             string select = "ORDER BY post_date DESC LIMIT 1";
-            string[] fields = new string[] { "post_id", "title", "post_date" };
+            string[] fields = new string[] { "post_id", "title", "href", "post_date" };
 
             List<Dictionary<string, object>> result = fetcher.Fetch(_select(select), fields);
 
@@ -57,7 +57,8 @@ namespace sentimentanalysis.Core.Database.Service
                 Dictionary<string, object> dbPostObject = result[0];
 
                 return new Post(
-                    dbPostObject["title"].ToString(), 
+                    dbPostObject["title"].ToString(),
+                    dbPostObject["href"].ToString(),
                     DateTime.Parse(dbPostObject["post_date"].ToString()),
                     config
                 );
@@ -90,7 +91,7 @@ namespace sentimentanalysis.Core.Database.Service
 
         private List<Post> _fetchPosts(string select, CoreConfig config)
         {
-			string[] fields = new string[] { "post_id", "title", "post_date" };
+			string[] fields = new string[] { "post_id", "title", "href", "post_date" };
 
 			Console.WriteLine(_select(select));
 			List<Dictionary<string, object>> result = fetcher.Fetch(_select(select), fields);
@@ -102,6 +103,7 @@ namespace sentimentanalysis.Core.Database.Service
 					new Post(
 						Convert.ToInt32(rowPost["post_id"]),
 						rowPost["title"].ToString(),
+                        rowPost["href"].ToString(),
 						DateTime.Parse(rowPost["post_date"].ToString()),
 						config
 					)

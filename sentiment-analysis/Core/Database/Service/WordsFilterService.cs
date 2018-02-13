@@ -51,9 +51,10 @@ namespace sentimentanalysis.Core.Database.Service
 				string[] wordsList = post["title"].ToString().Split(' ');
 				foreach (string wordString in wordsList)
 				{
+                    int tmpInt;
 					if (0 == wordString.Trim().Length
 						|| Isset(wordString)
-						|| Int32.TryParse(wordString, out int tmpInt))
+						|| Int32.TryParse(wordString, out tmpInt))
 					{
 						continue;
 					}

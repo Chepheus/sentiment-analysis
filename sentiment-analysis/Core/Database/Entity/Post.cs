@@ -1,5 +1,4 @@
 ﻿using System;
-using AngleSharp.Dom;
 using sentimentanalysis.Config;
 using System.Text.RegularExpressions;
 
@@ -10,6 +9,8 @@ namespace sentimentanalysis.Core.Database.Entity
         protected int postId;
 
         protected string title;
+
+        protected string href;
 
         protected DateTime time;
 
@@ -32,6 +33,11 @@ namespace sentimentanalysis.Core.Database.Entity
             }
         }
 
+        public string Href
+        {
+            get { return href; }
+        }
+
         public string Time
         {
             get { return time.ToString(config.TimeConfig.TimeFormat); }
@@ -42,20 +48,21 @@ namespace sentimentanalysis.Core.Database.Entity
             get { return time; }
         }
 
-        public Post(string title, DateTime time, CoreConfig config)
+        public Post(string title, string href, DateTime time, CoreConfig config)
         {
-            init(title, time, config);
+            init(title, href, time, config);
         }
 
-        public Post(int postId, string title, DateTime time, CoreConfig config)
+        public Post(int postId, string title, string href, DateTime time, CoreConfig config)
         {
-            init(title, time, config);
+            init(title, href, time, config);
             this.postId = postId;
         }
 
-        private void init(string title, DateTime time, CoreConfig config)
+        private void init(string title, string href, DateTime time, CoreConfig config)
         {
 			this.title = title;
+            this.href = href;
 			this.time = time;
 			this.config = config;
         }
