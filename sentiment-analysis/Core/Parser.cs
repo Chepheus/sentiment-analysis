@@ -1,4 +1,5 @@
-﻿using sentimentanalysis.Config;
+﻿using sentimentanalysis.Core;
+using sentimentanalysis.Config;
 using sentimentanalysis.Core.Site;
 using sentimentanalysis.Core.Site.Iterator;
 using sentimentanalysis.Core.Site.Generator;
@@ -16,6 +17,7 @@ namespace sentimentanalysis.Core
         protected UrlGenerator urlGenerator;
         protected WebClient webClient;
         protected CoreConfig config;
+        protected ToLemmasConverter toLemmaConverter;
 
         public Parser(PostService postService,
                       CurrencyValueService currencyValueService,
@@ -27,12 +29,16 @@ namespace sentimentanalysis.Core
             this.webClient = new WebClient();
             this.webPagesIterator = new WebPagesIterator(urlGenerator, webClient);
             this.config = config;
+            this.toLemmaConverter = new ToLemmasConverter();
         }
 
         public void Parse()
         {
 			Post post = postService.SelectLastRecord(config);
-			PostParser postParser = new PostParser(postService, webPagesIterator, config);
+            PostParser postParser = new PostParser(postService, 
+                                                   webPagesIterator, 
+                                                   toLemmaConverter, 
+                                                   config);
 
 			if (null != post)
 			{

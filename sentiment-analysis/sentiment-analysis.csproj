@@ -120,6 +120,7 @@
     <Compile Include="Core\Analysis\Service\SentimentCoeficientCalculator.cs" />
     <Compile Include="Config\Common\TelegramConfig.cs" />
     <Compile Include="Core\TelegramSender.cs" />
+    <Compile Include="Core\ToLemmasConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

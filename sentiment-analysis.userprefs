@@ -1,23 +1,18 @@
 ﻿<Properties StartupConfiguration="{40F7DC2F-CD82-41E6-9747-ADC082D03CB2}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="sentiment-analysis/Core/Database/Service/WordsFilterService.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="sentiment-analysis/Program.cs">
     <Files>
-      <File FileName="sentiment-analysis/Program.cs" Line="12" Column="20" />
+      <File FileName="sentiment-analysis/Program.cs" Line="70" Column="31" />
       <File FileName="sentiment-analysis/Config/Common/TelegramConfig.cs" Line="13" Column="35" />
       <File FileName="sentiment-analysis/Core/TelegramSender.cs" Line="8" Column="1" />
-      <File FileName="sentiment-analysis/Core/Parser.cs" Line="2" Column="29" />
-      <File FileName="sentiment-analysis/Core/Database/Service/WordsFilterService.cs" Line="57" Column="41" />
+      <File FileName="sentiment-analysis/Core/Parser.cs" Line="41" Column="52" />
+      <File FileName="sentiment-analysis/Core/Database/Service/WordsFilterService.cs" Line="13" Column="9" />
+      <File FileName="sentiment-analysis/Core/PostParser.cs" Line="116" Column="90" />
+      <File FileName="sentiment-analysis/Core/ToLemmasConverter.cs" Line="8" Column="58" />
+      <File FileName="sentiment-analysis/Core/Analysis/InputPostAnalisator.cs" Line="32" Column="18" />
+      <File FileName="sentiment-analysis/Config/Site/AbstractSiteConfig.cs" Line="30" Column="23" />
+      <File FileName="sentiment-analysis/Core/Analysis/Analizators/AnalizatorFactory.cs" Line="26" Column="43" />
+      <File FileName="sentiment-analysis/Core/Analysis/Analizators/GrowthAnalizator.cs" Line="6" Column="46" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="sentiment-analysis" expanded="True">
-            <Node name="sentiment-analysis" expanded="True">
-              <Node name="Config" selected="True" />
-            </Node>
-          </Node>
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

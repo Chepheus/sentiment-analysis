@@ -42,7 +42,8 @@ namespace sentimentanalysis
 
 			SentimentCoeficientCalculator calcuator =
 				new SentimentCoeficientCalculator(wordService, postExtremumService);
-            InputPostAnalisator inputPostAnalizator = new InputPostAnalisator(calcuator);
+            InputPostAnalisator inputPostAnalizator = 
+                new InputPostAnalisator(new ToLemmasConverter(), calcuator);
 
 			/********** I **********/
 			//Parser parser = new Parser(postService, currencyValueService, config);
@@ -69,17 +70,17 @@ namespace sentimentanalysis
 			/********** III **********/
 
 			/********** IV **********/
-			//ConfigEntity lastPostTime = configService.Get(ConfigEntity.LAST_POST_TIME);
-            //TimeParser timeParser = new TimeParser(lastPostTime.Value);
-            //List<Post> posts = postService.GetPostsSinceDate(timeParser.GetDateTime(), config);
+			ConfigEntity lastPostTime = configService.Get(ConfigEntity.LAST_POST_TIME);
+            TimeParser timeParser = new TimeParser(lastPostTime.Value);
+            List<Post> posts = postService.GetPostsSinceDate(timeParser.GetDateTime(), config);
 
-            //Dictionary<Post, float> estimatedPosts = inputPostAnalizator.GetPosts(posts);
+            Dictionary<Post, float> estimatedPosts = inputPostAnalizator.GetPosts(posts);
 
-            //IEnumerable<KeyValuePair<Post, float>> orderedEstimatedPosts = estimatedPosts.Where(pair => Math.Abs(pair.Value) >= 0.02);
-            //TelegramSender telegramSender = new TelegramSender(config);
-            //List<Task<Message>> taskList = telegramSender.SendEstimatedPosts(orderedEstimatedPosts);
+            IEnumerable<KeyValuePair<Post, float>> orderedEstimatedPosts = estimatedPosts.Where(pair => Math.Abs(pair.Value) >= 0.02);
+            TelegramSender telegramSender = new TelegramSender(config);
+            List<Task<Message>> taskList = telegramSender.SendEstimatedPosts(orderedEstimatedPosts);
 
-            //Task.WaitAll(taskList.ToArray());
+            Task.WaitAll(taskList.ToArray());
 			/********** IV **********/
 
 			connection.Close();

@@ -1,4 +1,5 @@
 ﻿using System;
+using sentimentanalysis.Core;
 using System.Collections.Generic;
 using sentimentanalysis.Core.Database.Entity;
 using sentimentanalysis.Core.Analysis.Service;
@@ -8,9 +9,12 @@ namespace sentimentanalysis.Core.Analysis
     public class InputPostAnalisator
     {
         protected SentimentCoeficientCalculator sentimentCoeficientCalculator;
+        protected ToLemmasConverter toLemmaConverter;
 
-        public InputPostAnalisator(SentimentCoeficientCalculator sentimentCoeficientCalculator)
+        public InputPostAnalisator(ToLemmasConverter toLemmaConverter, 
+                                   SentimentCoeficientCalculator sentimentCoeficientCalculator)
         {
+            this.toLemmaConverter = toLemmaConverter;
             this.sentimentCoeficientCalculator = sentimentCoeficientCalculator;
         }
 
@@ -38,14 +42,15 @@ namespace sentimentanalysis.Core.Analysis
 
             foreach (string word in words)
 			{
-                float coeficient = getWordCoeficient(word);
+                string lemmatizedWord = toLemmaConverter.ToLemma(word);
+                float coeficient = getWordCoeficient(lemmatizedWord);
                 postCoeficient += coeficient;
 
                 if (Math.Abs(coeficient) > .000001)
                 {
                     if (isDebug)
                     {
-                        Console.WriteLine("{0}: {1}", word, coeficient);
+                        Console.WriteLine("{0}: {1}", lemmatizedWord, coeficient);
                     }
                     
                     estimatedWordsCount++;

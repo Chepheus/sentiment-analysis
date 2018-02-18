@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using AngleSharp.Dom;
+using sentimentanalysis.Core;
 using sentimentanalysis.Config;
 using sentimentanalysis.Core.Site;
 using sentimentanalysis.Core.Site.Entity;
@@ -14,14 +15,17 @@ namespace sentimentanalysis.Core
     {
         protected PostService postService;
         protected WebPagesIterator webPagesIterator;
+        protected ToLemmasConverter toLemmaConverter;
         protected CoreConfig config;
 
         public PostParser(PostService postService, 
-                          WebPagesIterator webPagesIterator, 
+                          WebPagesIterator webPagesIterator,
+                          ToLemmasConverter toLemmaConverter,
                           CoreConfig config)
         {
             this.postService = postService;
             this.webPagesIterator = webPagesIterator;
+            this.toLemmaConverter = toLemmaConverter;
             this.config = config;
         }
 
@@ -79,16 +83,19 @@ namespace sentimentanalysis.Core
                                   IHtmlCollection<IElement> times, 
                                 IHtmlCollection<IElement> hrefs)
         {
+            Console.WriteLine(hrefs.Length + "; " + titles.Length);
 			for (int i = 0, l = titles.Length; i < l; i++)
 			{
                 string timeString = times[i].GetAttribute("datetime");
                 string title = titles[i].TextContent;
                 string href = hrefs[i].GetAttribute("href");
 
-                if (0 == timeString.Length || 0 == title.Length) continue;
+                if (0 == timeString.Length || 0 == title.Length || 0 == href.Length) continue;
 
                 DateTime time = new TimeParser(timeString).GetDateTime();
-                postService.Insert(new Post(title, href, time, config));
+                string lemmatizedTitle = toLemmaConverter.ToLemma(title);
+
+                postService.Insert(new Post(lemmatizedTitle, href, time, config));
 			}
         }
 
